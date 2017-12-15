@@ -1,0 +1,10 @@
+<views>
+    <button id = "register" name = "注册" x = "100" y = "100" w = "100" h = "40"> </button>
+
+    <textField id = "input" x = "100" y = "300" w = "97" h = "30" placeholder = "请输入" borderStyle = "3" > </textField>
+    <imageView id = "image" x = "100" y = "400" w = "100" h = "60"> </imageView>
+
+
+</views>
+
+
