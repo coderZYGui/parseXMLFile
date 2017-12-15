@@ -55,52 +55,43 @@
         [_viewArray addObject:btn];
         
         [btn setTitle:attributeDict[@"name"] forState:UIControlStateNormal];
-        
-        NSInteger x = [attributeDict[@"x"] integerValue];
-        NSInteger y = [attributeDict[@"y"] integerValue];
-        NSInteger w = [attributeDict[@"w"] integerValue];
-        NSInteger h = [attributeDict[@"h"] integerValue];
-        btn.frame = CGRectMake(x, y, w, h);
-        
+        CGRect rect = [self parseWithFrame:attributeDict];
+        btn.frame = rect;
         btn.backgroundColor = [UIColor grayColor];
-        
         [self.view addSubview:btn];
         
     }else if ([elementName isEqualToString:@"textField"]){
         
         UITextField *textFiled = [[UITextField alloc] init];
-        
-        NSInteger x = [attributeDict[@"x"] integerValue];
-        NSInteger y = [attributeDict[@"y"] integerValue];
-        NSInteger w = [attributeDict[@"w"] integerValue];
-        NSInteger h = [attributeDict[@"h"] integerValue];
-        
-        textFiled.frame = CGRectMake(x, y, w, h);
-        
+        CGRect rect = [self parseWithFrame:attributeDict];
+        textFiled.frame = rect;
         textFiled.backgroundColor = [UIColor clearColor];
         textFiled.placeholder = attributeDict[@"placeholder"];
         textFiled.borderStyle = [attributeDict[@"borderStyle"] integerValue];
         
-        
         [_viewArray addObject:textFiled];
-        
         [self.view addSubview:textFiled];
         
     }else{
         
-        NSInteger x = [attributeDict[@"x"] integerValue];
-        NSInteger y = [attributeDict[@"y"] integerValue];
-        NSInteger w = [attributeDict[@"w"] integerValue];
-        NSInteger h = [attributeDict[@"h"] integerValue];
+        CGRect rect = [self parseWithFrame:attributeDict];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, w, h)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
         imageView.image = [UIImage imageNamed:@"head.jpg"];
         [_viewArray addObject:imageView];
         [self.view addSubview:imageView];
         
-        
     }
+}
+
+- (CGRect)parseWithFrame:(NSDictionary *)dict
+{
+    NSInteger x = [dict[@"x"] integerValue];
+    NSInteger y = [dict[@"y"] integerValue];
+    NSInteger w = [dict[@"w"] integerValue];
+    NSInteger h = [dict[@"h"] integerValue];
     
+    return CGRectMake(x, y, w, h);
 }
 
 // 获取节点的值(这个方法会在节点头 和 节点尾分别调用一次)
